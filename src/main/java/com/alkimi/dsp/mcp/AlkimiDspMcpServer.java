@@ -22,7 +22,7 @@ import java.util.concurrent.*;
  */
 public class AlkimiDspMcpServer {
     private static final Logger LOGGER = LoggerFactory.getLogger(AlkimiDspMcpServer.class);
-    private static final String PROTOCOL_VERSION = "0.1.0";
+    private static final String PROTOCOL_VERSION = "2024-11-05";
 
     private final ObjectMapper objectMapper;
     private final BufferedReader input;
@@ -33,10 +33,21 @@ public class AlkimiDspMcpServer {
     private final AlkimiDspConfig config;
 
     public AlkimiDspMcpServer() {
+        // Ensure all logging goes to stderr to avoid interfering with MCP protocol
+        System.setOut(new PrintStream(new OutputStream() {
+            private final PrintStream original = System.out;
+
+            @Override
+            public void write(int b) throws IOException {
+                // Only allow JSON output to stdout
+                original.write(b);
+            }
+        }));
+
         this.config = AlkimiDspConfig.getInstance();
         this.objectMapper = new ObjectMapper();
         this.input = new BufferedReader(new InputStreamReader(System.in));
-        this.output = new PrintWriter(System.out, true);
+        this.output = new PrintWriter(new OutputStreamWriter(System.out), true);
         this.toolHandlers = new HashMap<>();
         this.executor = Executors.newFixedThreadPool(config.getServer().getThreadPoolSize());
         this.protocol = new McpProtocol(objectMapper);
@@ -330,6 +341,26 @@ public class AlkimiDspMcpServer {
 
     public static void main(String[] args) {
         AlkimiDspMcpServer server = new AlkimiDspMcpServer();
+
+        // Add shutdown hook for graceful shutdown
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            LOGGER.info("Shutdown signal received");
+            server.shutdown();
+        }));
+
         server.start();
+    }
+
+    private volatile boolean running = true;
+
+    public void shutdown() {
+        running = false;
+        executor.shutdown();
+        try {
+            // Close input to break the read loop
+            input.close();
+        } catch (IOException e) {
+            LOGGER.error("Error closing input", e);
+        }
     }
 }

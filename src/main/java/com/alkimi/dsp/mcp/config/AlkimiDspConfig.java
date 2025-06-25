@@ -1,7 +1,9 @@
 package com.alkimi.dsp.mcp.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,8 +14,12 @@ import java.util.Properties;
  * Configuration for Alkimi DSP
  */
 public class AlkimiDspConfig {
+    @JsonProperty("api-url")
     private String apiUrl;
+
+    @JsonProperty("auth-token")
     private String authToken;
+
     private Server server = new Server();
 
     private static AlkimiDspConfig instance;
@@ -50,7 +56,7 @@ public class AlkimiDspConfig {
                 input.close();
             }
         } catch (Exception e) {
-            // Log but continue - will fall back to env vars
+            // Log to stderr to avoid interfering with MCP protocol
             System.err.println("Could not load application.yml: " + e.getMessage());
         }
 
@@ -117,6 +123,8 @@ public class AlkimiDspConfig {
     public static class Server {
         private String name = "alkimi-dsp-server";
         private String version = "1.0.0";
+
+        @JsonProperty("thread-pool-size")
         private int threadPoolSize = 10;
 
         public String getName() {

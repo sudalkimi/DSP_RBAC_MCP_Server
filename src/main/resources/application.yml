@@ -1,27 +1,11 @@
 # Alkimi DSP MCP Server Configuration
 alkimi:
   dsp:
+    # API configuration - these can be overridden by environment variables
     api-url: https://ui.alkimi-dsp-dev.com
     auth-token: "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ4Snh6cThlZUVYNlktMC1hVWtwU3JHZ29KS0Q3VzBranR4ZlkzSEZ3THRVIn0.eyJleHAiOjE3NTA4NTY5NTgsImlhdCI6MTc1MDg1NTE1OCwianRpIjoiZTFmMGE1YWItOGU4MS00MDIxLWEzNWEtY2ZkZjllOTcwMjBjIiwiaXNzIjoiaHR0cHM6Ly9kZXYuaWFtLmFsa2ltaS5vcmcvYXV0aC9yZWFsbXMvaWFtZHNwIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjUwNzcyOWJjLWJhOGEtNGQyZS1hNzJmLWY5NDcxOTIyOTlmYSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImRzcGJrIiwic2lkIjoiZTM5NGQ4YjctZDFmMS00YmM3LWJhMTItNmExYmIzNjBjOWYzIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJST0xFX01BQSIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJkZWZhdWx0LXJvbGVzLWlhbWRzcCJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiVGltIEJlcm5lcnMiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0aW1AZXhhbXBsZS5jb20iLCJnaXZlbl9uYW1lIjoiVGltIiwiZmFtaWx5X25hbWUiOiJCZXJuZXJzIiwiZW1haWwiOiJ0aW1AZXhhbXBsZS5jb20ifQ.B6wN0SuchR6esFRH9VSFm0NLEj7ZWNC5i-z9E78tch23cmA54vxhzPZO19Vs_kH1Q4VFuEuGOal_ijVFYcWwBkECaxk53wjqNRWvHCKd3QAXDsbhOHNggv8UZpX9yQLlTK3aNv057vr3X7yhC9dKUmmSTkqCD-RsvNcImE-opcGJVFqEmXP-HwpcbB8RN_nyTHMvfh6HSoALv26uc416S7O6jawDEr25zpUXoubPtGjPxr6bkBxmLghRwi9NoyIQ3l9HOmWS4wGi8uaD327K60kCps7hRHLbbQOSf2aT9KPx4aBakdFNLDI2itZhlZH6BSD5LOOAgd16IJXH6GmGfQ"
-    
     # Server configuration
     server:
       name: alkimi-dsp-server
       version: 1.0.0
       thread-pool-size: 10
-
-# Spring Boot configuration
-spring:
-  application:
-    name: alkimi-dsp-mcp-server
-  main:
-    banner-mode: off
-    web-application-type: none
-
-# Logging configuration
-logging:
-  level:
-    root: INFO
-    com.alkimi.dsp: DEBUG
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

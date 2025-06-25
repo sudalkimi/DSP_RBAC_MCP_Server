@@ -7,6 +7,7 @@ com\alkimi\dsp\mcp\config\AlkimiDspConfig.class
 com\alkimi\dsp\mcp\protocol\McpProtocol.class
 com\alkimi\dsp\mcp\handlers\ListCampaignsHandler.class
 com\alkimi\dsp\mcp\models\CampaignRequest.class
+com\alkimi\dsp\mcp\AlkimiDspMcpServer$1.class
 com\alkimi\dsp\mcp\handlers\GetCampaignHandler.class
 com\alkimi\dsp\mcp\client\AlkimiDspApiClient$ApiException.class
 com\alkimi\dsp\mcp\handlers\FilterCampaignsHandler.class
