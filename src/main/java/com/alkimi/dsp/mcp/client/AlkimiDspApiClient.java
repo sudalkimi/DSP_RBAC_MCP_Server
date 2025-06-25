@@ -3,6 +3,10 @@ package com.alkimi.dsp.mcp.client;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.alkimi.dsp.mcp.models.*;
+import com.alkimi.dsp.mcp.config.AlkimiDspConfig;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.net.*;
@@ -14,6 +18,7 @@ import java.util.logging.*;
 /**
  * HTTP client for interacting with Alkimi DSP API
  */
+@Component
 public class AlkimiDspApiClient {
     private static final Logger LOGGER = Logger.getLogger(AlkimiDspApiClient.class.getName());
     
@@ -22,16 +27,17 @@ public class AlkimiDspApiClient {
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
     
-    public AlkimiDspApiClient() {
-        // Read configuration from environment variables
-        this.baseUrl = System.getenv("ALKIMI_DSP_API_URL");
-        if (this.baseUrl == null) {
-            throw new IllegalStateException("ALKIMI_DSP_API_URL environment variable not set");
+    @Autowired
+    public AlkimiDspApiClient(AlkimiDspConfig config) {
+        this.baseUrl = config.getApiUrl();
+        this.authToken = config.getAuthToken();
+        
+        if (this.baseUrl == null || this.baseUrl.isEmpty()) {
+            throw new IllegalStateException("Alkimi DSP API URL not configured. Please set alkimi.dsp.api-url in application.yml");
         }
         
-        this.authToken = System.getenv("ALKIMI_DSP_AUTH_TOKEN");
-        if (this.authToken == null) {
-            throw new IllegalStateException("ALKIMI_DSP_AUTH_TOKEN environment variable not set");
+        if (this.authToken == null || this.authToken.isEmpty()) {
+            throw new IllegalStateException("Alkimi DSP auth token not configured. Please set alkimi.dsp.auth-token in application.yml");
         }
         
         this.httpClient = HttpClient.newBuilder()

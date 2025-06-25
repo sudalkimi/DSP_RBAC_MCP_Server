@@ -3,20 +3,29 @@ package com.alkimi.dsp.mcp.handlers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.alkimi.dsp.mcp.client.AlkimiDspApiClient;
+import com.alkimi.dsp.mcp.protocol.McpProtocol;
 
-import java.util.logging.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.*;
 
 /**
  * Handler for retrieving campaign details by ID
  */
+@Component
 public class GetCampaignHandler implements ToolHandler {
-    private static final Logger LOGGER = Logger.getLogger(GetCampaignHandler.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(GetCampaignHandler.class);
     private final AlkimiDspApiClient apiClient;
+    private final McpProtocol protocol;
     
-    public GetCampaignHandler() {
-        this.apiClient = new AlkimiDspApiClient();
+    @Autowired
+    public GetCampaignHandler(AlkimiDspApiClient apiClient) {
+        this.apiClient = apiClient;
+        this.protocol = new McpProtocol(new ObjectMapper());
     }
     
     @Override

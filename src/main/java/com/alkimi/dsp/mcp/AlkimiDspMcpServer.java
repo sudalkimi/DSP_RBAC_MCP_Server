@@ -1,4 +1,4 @@
-package com.alkimi.mcp;
+package com.alkimi.dsp.mcp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
