@@ -1,0 +1,16 @@
+com\alkimi\dsp\mcp\config\AlkimiDspConfig$ConfigRoot.class
+com\alkimi\dsp\mcp\AlkimiDspMcpServer.class
+com\alkimi\dsp\mcp\models\LineItemRequest.class
+com\alkimi\dsp\mcp\config\AlkimiDspConfig$AlkimiRoot.class
+com\alkimi\dsp\mcp\client\AlkimiDspApiClient.class
+com\alkimi\dsp\mcp\config\AlkimiDspConfig.class
+com\alkimi\dsp\mcp\protocol\McpProtocol.class
+com\alkimi\dsp\mcp\handlers\ListCampaignsHandler.class
+com\alkimi\dsp\mcp\models\CampaignRequest.class
+com\alkimi\dsp\mcp\handlers\GetCampaignHandler.class
+com\alkimi\dsp\mcp\client\AlkimiDspApiClient$ApiException.class
+com\alkimi\dsp\mcp\handlers\FilterCampaignsHandler.class
+com\alkimi\dsp\mcp\handlers\ToolHandler.class
+com\alkimi\dsp\mcp\handlers\GetAdvertiserCampaignsHandler.class
+com\alkimi\dsp\mcp\config\AlkimiDspConfig$Server.class
+com\alkimi\dsp\mcp\handlers\CreateCampaignHandler.class
