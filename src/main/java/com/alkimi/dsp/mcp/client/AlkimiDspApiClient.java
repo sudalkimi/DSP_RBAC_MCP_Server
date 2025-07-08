@@ -27,6 +27,7 @@ public class AlkimiDspApiClient {
         AlkimiDspConfig config = AlkimiDspConfig.getInstance();
         this.baseUrl = config.getApiUrl();
         this.authToken = config.getAuthToken();
+        LOGGER.info("this.authToken "+ this.authToken);
 
         this.httpClient = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(30))
